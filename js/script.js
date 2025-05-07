@@ -35,19 +35,22 @@ $(document).ready(function () {
       return;
     }
 
-    // Lấy id sản phẩm từ chính nút
     const id = $(this).data("id");
-
     let gioHang = JSON.parse(sessionStorage.getItem("gioHang")) || [];
 
-    if (!gioHang.includes(id)) {
-      gioHang.push(id);
-      sessionStorage.setItem("gioHang", JSON.stringify(gioHang));
+    // Kiểm tra xem sản phẩm đã có trong giỏ chưa
+    let index = gioHang.findIndex((item) => item.id === id);
+    if (index === -1) {
+      gioHang.push({ id: id, soLuong: 1 });
       alert("Đã thêm sản phẩm vào giỏ hàng!");
     } else {
-      alert("Sản phẩm đã có trong giỏ hàng!");
+      gioHang[index].soLuong += 1;
+      alert("Đã tăng số lượng sản phẩm trong giỏ hàng!");
     }
+
+    sessionStorage.setItem("gioHang", JSON.stringify(gioHang));
   });
+
   // Nhấn nút btnXemThongTin
   $(document).on("click", ".btnXemThongTin", function (e) {
     e.preventDefault();
@@ -71,7 +74,7 @@ $(document).ready(function () {
     );
   } else {
     $("#khoiDN").html(
-      '<button class="btn btn-primary p-2 text-white">Đăng xuất</button>'
+      '<button class="btn btn-primary p-2 text-white dangXuat">Đăng xuất</button>'
     );
   }
 });

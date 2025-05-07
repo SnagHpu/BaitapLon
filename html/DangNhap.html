@@ -249,7 +249,7 @@
       $(document).ready(function () {
         $("#btn-them").click(function () {
           let danhSachKH =
-            JSON.parse(sessionStorage.getItem("danhSachSV")) || [];
+            JSON.parse(sessionStorage.getItem("danhSachKH")) || [];
           let ten = $("#HT").val();
           let sdt = $("#SDT").val();
           let email = $("#Email").val();
@@ -311,7 +311,7 @@
             $("#myModal .text-danger").text("*");
             danhSachKH.push(khachHang);
 
-            sessionStorage.setItem("danhSachSV", JSON.stringify(danhSachKH));
+            sessionStorage.setItem("danhSachKH", JSON.stringify(danhSachKH));
 
             $("#myModal").modal("hide");
           } else if (kiemTra == 0) {
@@ -324,7 +324,7 @@
           let tk = $("#tk").val().trim();
           let mk = $("#mk").val().trim();
           let danhSachKH =
-            JSON.parse(sessionStorage.getItem("danhSachSV")) || [];
+            JSON.parse(sessionStorage.getItem("danhSachKH")) || [];
           let kt = 0;
           for (let kh of danhSachKH) {
             if (kh.TK === tk && kh.MK === mk) {

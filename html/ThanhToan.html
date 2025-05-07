@@ -35,11 +35,11 @@
           complete: function (results) {
             let data = results.data;
             // Hiển thị các sản phẩm trong giỏ hàng
-            gioHang.forEach((id) => {
-              const sp = data.find((item) => item.id == id);
+            gioHang.forEach((item) => {
+              const sp = data.find((sp) => sp.id == item.id);
               if (sp) {
                 const donGia = Number(sp.gia);
-                const soLuong = 1; // mặc định số lượng là 1
+                const soLuong = item.soLuong;
                 const thanhTien = donGia * soLuong;
                 tongTien += thanhTien;
 

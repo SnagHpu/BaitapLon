@@ -17,20 +17,17 @@
         let gioHang = JSON.parse(sessionStorage.getItem("gioHang")) || [];
         let tongTien = 0;
 
-        // Đọc dữ liệu sản phẩm từ CSV
         Papa.parse("../data/thongTinSanPham.csv", {
           download: true,
           header: true,
           complete: function (results) {
             let data = results.data;
-            // Hiển thị các sản phẩm trong giỏ hàng
-            gioHang.forEach((id) => {
-              const sp = data.find((item) => item.id == id);
+
+            gioHang.forEach((item) => {
+              const sp = data.find((sp) => sp.id == item.id);
               if (sp) {
                 const donGia = Number(sp.gia);
-                const soLuong = gioHang.filter(
-                  (itemId) => itemId === sp.id
-                ).length; // Đếm số lượng sản phẩm trong giỏ hàng
+                let soLuong = item.soLuong;
                 const thanhTien = donGia * soLuong;
                 tongTien += thanhTien;
 
@@ -39,12 +36,7 @@
                     <td>${sp.ten}</td>
                     <td>${donGia.toLocaleString()} VNĐ</td>
                     <td>
-                      <input
-                        type="number"
-                        class="form-control quantity-input"
-                        value="${soLuong}"
-                        min="1"
-                      />
+                      <input type="number" class="form-control quantity-input" value="${soLuong}" min="1" />
                     </td>
                     <td class="total-price">${thanhTien.toLocaleString()} VNĐ</td>
                     <td>
@@ -55,44 +47,47 @@
               }
             });
 
-            // Cập nhật tổng tiền
             updateTotal();
 
-            // Lắng nghe sự kiện thay đổi số lượng sản phẩm
+            // Thay đổi số lượng
             $(".quantity-input").on("change", function () {
               let row = $(this).closest("tr");
-              let quantity = parseInt($(this).val());
+              let quantity = parseInt($(this).val()) || 1;
               let productId = row.data("id");
-              let price = parseInt(
-                row.find("td:eq(1)").text().replace(" VNĐ", "").replace(",", "")
-              );
 
-              // Cập nhật lại giỏ hàng với số lượng mới
-              let updatedCart = [];
-              gioHang.forEach((item) => {
-                if (item === productId) {
-                  if (quantity > 0) {
-                    updatedCart.push(item);
-                  }
-                } else {
-                  updatedCart.push(item);
+              // Cập nhật lại trong gioHang (dùng parseInt nếu id là số)
+              gioHang = gioHang.map((item) => {
+                if (item.id == productId) {
+                  return { ...item, soLuong: quantity };
                 }
+                return item;
               });
 
-              gioHang = updatedCart;
               sessionStorage.setItem("gioHang", JSON.stringify(gioHang));
 
-              // Tính toán lại tổng tiền cho sản phẩm
+              // Cập nhật thành tiền của từng dòng
+              let price =
+                parseInt(
+                  row
+                    .find("td:eq(1)")
+                    .text()
+                    .replace(" VNĐ", "")
+                    .replace(/\./g, "")
+                ) || 0;
+
               let total = price * quantity;
-              row.find(".total-price").text(total.toLocaleString() + " VNĐ");
+              row
+                .find(".total-price")
+                .text(total.toLocaleString("vi-VN") + " VNĐ");
+
               updateTotal();
             });
 
-            // Lắng nghe sự kiện xóa sản phẩm
+            // Xóa sản phẩm
             $(".remove-item").on("click", function () {
               let row = $(this).closest("tr");
               let productId = row.data("id");
-              gioHang = gioHang.filter((id) => id !== productId); // Xóa sản phẩm khỏi giỏ hàng
+              gioHang = gioHang.filter((item) => item.id !== productId);
               sessionStorage.setItem("gioHang", JSON.stringify(gioHang));
               row.remove();
               updateTotal();
@@ -100,20 +95,25 @@
           },
         });
 
-        // Cập nhật tổng tiền giỏ hàng
         function updateTotal() {
           let totalPrice = 0;
           $(".total-price").each(function () {
-            totalPrice += parseInt(
-              $(this).text().replace(" VNĐ", "").replace(",", "")
-            );
+            let text = $(this)
+              .text()
+              .replace(" VNĐ", "")
+              .replace(/\./g, "")
+              .trim();
+            let value = parseInt(text);
+            if (!isNaN(value)) {
+              totalPrice += value;
+            }
           });
+
           $("#cart-total").text(
-            `Tổng tiền: ${totalPrice.toLocaleString()} VNĐ`
+            `Tổng tiền: ${totalPrice.toLocaleString("vi-VN")},000 VNĐ`
           );
         }
 
-        // Khi nhấn nút tiếp tục thanh toán
         $("#checkout").on("click", function () {
           if (gioHang.length === 0) {
             alert(
@@ -121,7 +121,7 @@
             );
             return;
           }
-          window.location.href = "./ThanhToan.html"; // Chuyển hướng đến trang thanh toán
+          window.location.href = "./ThanhToan.html";
         });
       });
     </script>
