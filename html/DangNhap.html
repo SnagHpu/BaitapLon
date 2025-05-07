@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng nhập</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/script.js"></script>
+  </head>
+  <body>
+    <!-- Nav menu  -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary bg-light mb-3">
+      <div class="container">
+        <!-- Logo -->
+        <a class="navbar-brand" href="./TrangChu.html">
+          <img src="/img/logo.jpg" alt="Logo" />
+        </a>
+        <!-- Khối nút thu nhỏ -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- Khối chưa thanh menu -->
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 fs-3">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="./TrangChu.html"
+                >Trang chủ</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="./GioHang.html"
+                >Giỏ hàng</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="./ThanhToan.html"
+                >Thanh toán</a
+              >
+            </li>
+          </ul>
+
+          <!-- Khối chứa đăng nhập đăng ký -->
+          <div id="khoiDN" class="me-1 mb-2 mb-lg-0">
+            <a href="./DangNhap.html" class="btn btn-danger text-white active"
+              >Đăng nhập</a
+            >
+          </div>
+
+          <!-- Thanh tìm kiếm -->
+          <form class="d-flex" role="search">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Nhập..."
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-success" type="submit">Tìm</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <!-- head -->
+
+    <header class="main-body fs-5">
+      <div class="container bg-light">
+        <div class="row">
+          <div class="col-12">
+            <h1 class="text-center text-primary mb-5">Đăng Nhập</h1>
+          </div>
+        </div>
+        <div class="row">
+          <form class="form">
+            <div class="col-6 mx-auto">
+              <label class="form-label">Tài Khoản: </label>
+              <input type="text" class="form-control mb-3" id="tk" />
+            </div>
+
+            <div class="col-6 mx-auto">
+              <label class="form-label">Mật khẩu:</label>
+              <input type="password" class="form-control mb-3" id="mk" />
+            </div>
+            <p id="errDN" class="col-5 text-danger col-6 mx-auto"></p>
+            <div class="col-1 mx-auto fs-6">
+              <button
+                type="button"
+                class="col-12 text-center rounded-1 my-3 mx-auto"
+                id="btn-dangNhap"
+              >
+                Đăng nhập
+              </button>
+            </div>
+
+            <div class="col-1 ms-auto">
+              <div
+                id="modal-open"
+                class="btn btn-primary mb-3"
+                data-bs-toggle="modal"
+                data-bs-target="#myModal"
+              >
+                Đăng ký
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </header>
+
+    <!-- Footer -->
+    <footer class="fs-5 mt-3 mb-0">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3">MSSV: 23679031</div>
+          <div class="col-lg-4">Họ Tên: Nguyễn Phú Sang</div>
+          <div class="col-lg-5">
+            Đề tài: Website Giới thiệu báo giấy và cho phép đặt báo giấy trực
+            tuyến
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="myModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Header -->
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Đăng Ký Thông Tin
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Đóng"
+            ></button>
+          </div>
+
+          <!-- Body -->
+          <div class="modal-body">
+            <form action="thongTin" class="form">
+              <div class="col-10">
+                <label class="form-label">Họ Tên: </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="HT"
+                  placeholder="Nhập tên"
+                />
+                <p class="text-danger" id="errHT">*</p>
+              </div>
+
+              <div class="col-10">
+                <label class="form-label">Số điện thoại: </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="SDT"
+                  placeholder="Số điện thoại"
+                />
+                <p class="text-danger" id="errSDT">*</p>
+              </div>
+
+              <div class="col-10">
+                <label class="form-label">Email:</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="Email"
+                  placeholder="Email"
+                />
+                <p class="text-danger" id="errEmail">*</p>
+              </div>
+
+              <div class="col-10">
+                <label class="form-label">Tài khoản: </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="DKTK"
+                  placeholder="Tài khoản"
+                />
+                <p class="text-danger" id="errDKTK">*</p>
+              </div>
+
+              <div class="col-10">
+                <label class="form-label">Mật khẩu: </label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="DKMK"
+                  placeholder="Mật khẩu"
+                />
+                <p class="text-danger" id="errDKMK">*</p>
+              </div>
+
+              <div class="col-10">
+                <label class="form-label">Nhập lại mật khẩu: </label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="NLMK"
+                  placeholder="Nhập lại mật khẩu"
+                />
+                <p class="text-danger" id="errNLMK">*</p>
+              </div>
+            </form>
+          </div>
+
+          <!-- Footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="btn-them">
+              Đăng Ký
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Đóng
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        $("#btn-them").click(function () {
+          let danhSachKH =
+            JSON.parse(sessionStorage.getItem("danhSachSV")) || [];
+          let ten = $("#HT").val();
+          let sdt = $("#SDT").val();
+          let email = $("#Email").val();
+          let dktk = $("#DKTK").val();
+          let dkmk = $("#DKMK").val();
+          let nlmk = $("#NLMK").val();
+
+          let kiemTra = 1;
+          let kiemTraTen = /^[A-Za-z]+(\s[A-Za-z]+)+$/;
+          let kiemTraSDT = /^0\d{9}$/;
+          let kiemTraEmail = /^[0-9A-Za-z._%+-]+@[A-Za-z]+\.[A-Za-z]{2,}$/;
+          let kiemTraTK = /^[A-Za-z0-9]{8,}$/;
+          let kiemTraMK = /^[A-Za-z0-9@!#%]{6,}$/;
+
+          if (kiemTraTen.test(ten) == false) {
+            kiemTra = 0;
+            $("#errHT").text("Vui lòng nhập lại họ tên.");
+          }
+
+          if (kiemTraSDT.test(sdt) == false) {
+            kiemTra = 0;
+            $("#errSDT").text("Vui lòng nhập số điện thoại.");
+          }
+          if (kiemTraEmail.test(email) == false) {
+            kiemTra = 0;
+            $("#errEmail").text("Vui lòng nhập đúng email.");
+          }
+
+          danhSachKH.forEach(function (kn) {
+            if (kiemTraTK.test(dktk) == false) {
+              kiemTra = 0;
+              $("#errDKTK").text(
+                "Vui lòng nhập lại tài khoản từ 8 kí tự trở lên A-Z a-z 0-9."
+              );
+            }
+            if (dktk === kn.TK) {
+              kiemTra = 0;
+              $("#errDKTK").text("Tài khoản đã tồn tại.");
+            }
+          });
+
+          if (kiemTraMK.test(dkmk) == false) {
+            kiemTra = 0;
+            $("#errDKMK").text(
+              "Mật khẩu từ 6 kí tự trở lên và từ A-Z a-z 0-9 !@#%."
+            );
+          }
+
+          let khachHang = {
+            hoTen: ten,
+            SDT: sdt,
+            Email: email,
+            TK: dktk,
+            MK: dkmk,
+          };
+
+          if (nlmk === dkmk && kiemTra == 1) {
+            $("#myModal input").val("");
+            $("#myModal .text-danger").text("*");
+            danhSachKH.push(khachHang);
+
+            sessionStorage.setItem("danhSachSV", JSON.stringify(danhSachKH));
+
+            $("#myModal").modal("hide");
+          } else if (kiemTra == 0) {
+          } else {
+            $("#errNLMK").text("Mật khẩu nhập không đúng.");
+          }
+        });
+        //Sau khi nhấn nút đăng nhập
+        $("#btn-dangNhap").click(function () {
+          let tk = $("#tk").val().trim();
+          let mk = $("#mk").val().trim();
+          let danhSachKH =
+            JSON.parse(sessionStorage.getItem("danhSachSV")) || [];
+          let kt = 0;
+          for (let kh of danhSachKH) {
+            if (kh.TK === tk && kh.MK === mk) {
+              kt = 1;
+              sessionStorage.setItem("KH", JSON.stringify(kh));
+              $("#khoiDN").html(
+                '<button class="btn btn-primary p-2 text-white">Đăng xuất</button>'
+              );
+              window.location.href = "./TrangChu.html";
+              break;
+            }
+          }
+          if (kt == 0) {
+            $("#errDN").text("Tài khoản hoặc mật khẩu không đúng.");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

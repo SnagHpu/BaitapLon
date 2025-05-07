@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      table,
+      th,
+      td {
+        border: 1px solid #ddd;
+      }
+
+      th,
+      td {
+        padding: 10px;
+        text-align: center;
+      }
+
+      #checkout {
+        padding: 10px 20px;
+        background-color: green;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    </style>
+    <script>
+      // Dữ liệu bạn muốn ghi vào CSV
+      const data = [
+        {
+          id: "sbjc",
+          ten: "Báo An Ninh Hải Phòng",
+          gia: "20000",
+        },
+        {
+          id: "sHBvsjdb",
+          tenSanPham: "Báo Quân Đội Nhân Dân",
+          gia: "25000",
+        },
+      ];
+
+      // Chuyển đổi dữ liệu thành định dạng CSV
+      const csv = Papa.unparse(data);
+
+      // Đường dẫn tới file CSV có sẵn
+      const filePath = "../data/test.csv";
+
+      // Ghi dữ liệu vào file CSV
+      fs.appendFile(filePath, csv + "\n", function (err) {
+        if (err) throw err;
+        console.log("Dữ liệu đã được ghi vào file CSV!");
+      });
+    </script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <!-- Tên logo -->
+        <a class="navbar-brand" href="#">MyShop</a>
+
+        <!-- Nút menu cho mobile -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Menu chính -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Trang chủ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Sản phẩm</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Giới thiệu</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Liên hệ</a>
+            </li>
+          </ul>
+
+          <!-- Nút Đăng nhập và Đăng ký bên phải -->
+          <div class="d-flex">
+            <a href="#" class="btn btn-outline-light me-2">Đăng nhập</a>
+            <a href="#" class="btn btn-warning">Đăng ký</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <h1>Giỏ hàng của bạn</h1>
+    <table id="cart">
+      <thead>
+        <tr>
+          <th>Sản phẩm</th>
+          <th>Giá</th>
+          <th>Số lượng</th>
+          <th>Tổng</th>
+          <th>Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Các sản phẩm sẽ được thêm vào đây bằng JavaScript -->
+      </tbody>
+    </table>
+
+    <h2 id="cart-total">Tổng tiền: 0 VNĐ</h2>
+    <button id="checkout">Thanh toán</button>
+  </body>
+</html>
