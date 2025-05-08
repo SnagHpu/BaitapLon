@@ -258,7 +258,7 @@
           let nlmk = $("#NLMK").val();
 
           let kiemTra = 1;
-          let kiemTraTen = /^[A-Za-z]+(\s[A-Za-z]+)+$/;
+          let kiemTraTen = /^[A-Za-z]*(\s[A-Za-z]*)*$/;
           let kiemTraSDT = /^0\d{9}$/;
           let kiemTraEmail = /^[0-9A-Za-z._%+-]+@[A-Za-z]+\.[A-Za-z]{2,}$/;
           let kiemTraTK = /^[A-Za-z0-9]{8,}$/;
@@ -267,15 +267,21 @@
           if (kiemTraTen.test(ten) == false) {
             kiemTra = 0;
             $("#errHT").text("Vui lòng nhập lại họ tên.");
+          } else {
+            $("#errHT").text("*");
           }
 
           if (kiemTraSDT.test(sdt) == false) {
             kiemTra = 0;
             $("#errSDT").text("Vui lòng nhập số điện thoại.");
+          } else {
+            $("#errSDT").text("*");
           }
           if (kiemTraEmail.test(email) == false) {
             kiemTra = 0;
             $("#errEmail").text("Vui lòng nhập đúng email.");
+          } else {
+            $("#errEmail").text("*");
           }
 
           danhSachKH.forEach(function (kn) {
@@ -296,6 +302,8 @@
             $("#errDKMK").text(
               "Mật khẩu từ 6 kí tự trở lên và từ A-Z a-z 0-9 !@#%."
             );
+          } else {
+            $("#errDKMK").text("*");
           }
 
           let khachHang = {
@@ -314,7 +322,6 @@
             sessionStorage.setItem("danhSachKH", JSON.stringify(danhSachKH));
 
             $("#myModal").modal("hide");
-          } else if (kiemTra == 0) {
           } else {
             $("#errNLMK").text("Mật khẩu nhập không đúng.");
           }

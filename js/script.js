@@ -4,7 +4,7 @@ $(document).ready(function () {
     download: true,
     header: true,
     complete: function (results) {
-      console.log(results.data); // Kết quả đọc được
+      console.log(results.data);
     },
   });
 
