@@ -286,7 +286,7 @@
           }
 
           danhSachKH.forEach(function (kn) {
-            if (kiemTraTK.test(dktk) == false) {
+            if (kiemTraTK.test(dktk) == false || length(dktk) < 8) {
               kiemTra = 0;
               $("#errDKTK").text(
                 "Vui lòng nhập lại tài khoản từ 8 kí tự trở lên A-Z a-z 0-9."

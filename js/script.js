@@ -66,4 +66,15 @@ $(document).ready(function () {
       '<button class="btn btn-primary p-2 text-white dangXuat">Đăng xuất</button>'
     );
   }
+
+  $(document).on("click", ".dangXuat", function (e) {
+    e.preventDefault();
+
+    sessionStorage.removeItem("KH");
+    $("#khoiDN").html(`
+      <a href="./DangNhap.html" class="btn btn-danger text-white">Đăng nhập</a>
+    `);
+
+    window.location.href = "./TrangChu.html";
+  });
 });

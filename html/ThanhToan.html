@@ -17,7 +17,7 @@
       $(document).ready(function () {
         let gioHang = JSON.parse(sessionStorage.getItem("gioHang")) || [];
         let tongTien = 0;
-        let user = JSON.parse(sessionStorage.getItem("KH")); // Thông tin người dùng
+        let user = JSON.parse(sessionStorage.getItem("KH"));
 
         // Hiển thị thông tin người dùng
         if (user) {
@@ -27,14 +27,11 @@
             <p><strong>Email:</strong> ${user.Email}</p>
           `);
         }
-
-        // Đọc dữ liệu sản phẩm từ CSV
         Papa.parse("../data/thongTinSanPham.csv", {
           download: true,
           header: true,
           complete: function (results) {
             let data = results.data;
-            // Hiển thị các sản phẩm trong giỏ hàng
             gioHang.forEach((item) => {
               const sp = data.find((sp) => sp.id == item.id);
               if (sp) {
